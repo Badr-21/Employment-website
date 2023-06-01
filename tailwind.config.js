@@ -10,13 +10,16 @@ export default {
          colors: {
             EerieBlack: "#181918",
             Jet: "#28292A",
-            DimGray: "#A4A4B5",
+            DimGray: "#5F6068",
             Platinum: "#E9EAE9",
             JungleGreenOne: "#02AA85",
             JungleGreenTwo: "#02A07D",
          },
          boxShadow: {
             "new-md": "2px 2px 6px -1px rgb(0 0 0 / 0.1), -2px -2px 6px -1px rgb(0 0 0 / 0.1)",
+         },
+         backgroundColor: {
+            clicked: "#E9EAE9",
          },
       },
    },

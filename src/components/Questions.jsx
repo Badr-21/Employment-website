@@ -7,13 +7,13 @@ function Questions() {
    }, []);
 
    return (
-      <section className="flex w-full flex-col items-center gap-y-8">
+      <section className="flex w-full flex-col items-center gap-y-8 px-8">
          <h2 className="text-2xl font-bold">Frequently asked questions (FAQs)</h2>
          <div className="w-1/2" id="accordionExample">
             <div className="mb-4 rounded-lg border ">
                <p id="headingOne">
                   <button
-                     className="group relative flex w-full items-center p-4 text-[1.1rem] font-semibold text-EerieBlack"
+                     className="group relative flex w-full items-center p-4 text-[1.125rem] font-semibold text-EerieBlack"
                      type="button"
                      data-te-collapse-init
                      data-te-target="#collapseOne"
@@ -46,7 +46,7 @@ function Questions() {
                   aria-labelledby="headingOne"
                   data-te-parent="#accordionExample"
                >
-                  <div className="p-4">
+                  <div className="p-4 text-base font-semibold text-DimGray">
                      HuntJob is an worldwide employment website for job listings where current and
                      former employees anonymously review companies.
                   </div>
@@ -55,7 +55,7 @@ function Questions() {
             <div className="mb-4 rounded-lg border">
                <p id="headingTwo">
                   <button
-                     className="group relative flex w-full items-center p-4 text-[1.1rem] font-semibold text-EerieBlack"
+                     className="group relative flex w-full items-center p-4 text-[1.125rem] font-semibold text-EerieBlack"
                      type="button"
                      data-te-collapse-init
                      data-te-collapse-collapsed
@@ -88,7 +88,7 @@ function Questions() {
                   aria-labelledby="headingTwo"
                   data-te-parent="#accordionExample"
                >
-                  <div className="p-4">
+                  <div className="p-4 text-base font-semibold text-DimGray">
                      You will get notifications for every job post that matches your search.
                   </div>
                </div>
@@ -96,7 +96,7 @@ function Questions() {
             <div className="mb-4 rounded-lg border">
                <p id="headingThree">
                   <button
-                     className="group relative flex w-full items-center p-4 text-[1.1rem] font-semibold text-EerieBlack"
+                     className="group relative flex w-full items-center p-4 text-[1.125rem] font-semibold text-EerieBlack"
                      type="button"
                      data-te-collapse-init
                      data-te-collapse-collapsed
@@ -129,13 +129,15 @@ function Questions() {
                   aria-labelledby="headingThree"
                   data-te-parent="#accordionExample"
                >
-                  <div className="p-4">Yes, there are plenty of them and for every level.</div>
+                  <div className="p-4 text-base font-semibold text-DimGray">
+                     Yes, there are plenty of them and for every level.
+                  </div>
                </div>
             </div>
             <div className="mb-4 rounded-lg border">
                <p id="headingFour">
                   <button
-                     className="group relative flex w-full items-center p-4 text-[1.1rem] font-semibold text-EerieBlack"
+                     className="group relative flex w-full items-center p-4 text-[1.125rem] font-semibold text-EerieBlack"
                      type="button"
                      data-te-collapse-init
                      data-te-collapse-collapsed
@@ -168,7 +170,7 @@ function Questions() {
                   aria-labelledby="headingFour"
                   data-te-parent="#accordionExample"
                >
-                  <div className="p-4">
+                  <div className="p-4 text-base font-semibold text-DimGray">
                      No, the companies have the right to contact you or not-lg font-semiboldd on
                      their own criteria.
                   </div>
@@ -177,7 +179,7 @@ function Questions() {
             <div className="mb-4 rounded-lg border">
                <p id="headingFive">
                   <button
-                     className="group relative flex w-full items-center p-4 text-[1.1rem] font-semibold text-EerieBlack"
+                     className="group relative flex w-full items-center p-4 text-[1.125rem] font-semibold text-EerieBlack"
                      type="button"
                      data-te-collapse-init
                      data-te-collapse-collapsed
@@ -210,7 +212,9 @@ function Questions() {
                   aria-labelledby="headingFive"
                   data-te-parent="#accordionExample"
                >
-                  <div className="p-4">Yes, it's 100% free.</div>
+                  <div className="p-4 text-base font-semibold text-DimGray">
+                     Yes, it's 100% free.
+                  </div>
                </div>
             </div>
          </div>
