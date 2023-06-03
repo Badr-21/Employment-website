@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+   .pagination {
+      display: flex;
+      justify-content: center;
+      font-size: 1.1rem;
+      column-gap: 0.25rem;
+      color: #02a07d;
+   }
+
+   .page-num {
+      padding: 0.3rem;
+   }
+
+   .active {
+      background-color: #02a07d;
+      color: white;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+   }
+
+   .disable-btn {
+      color: #5f6068;
+      cursor: no-drop;
+   }
+}
