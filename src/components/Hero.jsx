@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import heroImage from "../assets/hero-image.png";
 function Hero() {
    return (
@@ -13,9 +14,11 @@ function Hero() {
             <p className="mb-8 text-xl font-semibold text-DimGray">
                Getting your dream job has never been easier, HuntJob is here for you.
             </p>
-            <button className="rounded-md bg-JungleGreenOne px-4 py-2 font-semibold text-white hover:opacity-90">
-               Explore
-            </button>
+            <Link to="search-job">
+               <button className="rounded-md bg-JungleGreenOne px-4 py-2 font-semibold text-white hover:opacity-90">
+                  Explore
+               </button>
+            </Link>
          </section>
          <section>
             <img className="w-[33rem]" src={heroImage} alt="woman work on laptop" />
