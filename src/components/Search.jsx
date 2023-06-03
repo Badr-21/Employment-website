@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import jobs from "../jobs_data.json";
 import { Link, useNavigate } from "react-router-dom";
-import { Toaster, toast } from "react-hot-toast";
 
 function Search({
    setTheJob,
@@ -79,6 +78,9 @@ function Search({
             setShowLocationError(true);
          } else if (theJob.length < 3) {
             setShowJobError(true);
+         } else if (theJob.length < 3 && theLocation.length < 3) {
+            setShowJobError(true);
+            setShowLocationError(true);
          } else {
             let currentJobs = jobs.filter((job) =>
                job.name.toLowerCase().includes(theJob.toLowerCase())
@@ -95,8 +97,8 @@ function Search({
          }
       }
       if (!theJob.length && !theLocation.length) {
-         console.log("none");
-         toast.error("Either enter a job or location.");
+         setShowJobError(true);
+         setShowLocationError(true);
       }
       setShowLocations(false);
    };
@@ -127,21 +129,19 @@ function Search({
 
    return (
       <section className="w-full px-8 py-12">
-         <Toaster
-            toastOptions={{
-               error: {
-                  style: {
-                     backgroundColor: "white",
-                     color: "red",
-                     fontWeight: "bold",
-                  },
-               },
-            }}
-         />
          <form className="flex w-full items-start justify-center gap-x-8">
             <div>
-               <div className="w-[26rem] rounded-md border border-JungleGreenTwo pl-4">
-                  <label className="font-semibold text-JungleGreenOne" htmlFor="job">
+               <div
+                  className={`w-[26rem] rounded-md border  pl-4 ${
+                     showJobError ? "border-red-500" : "border-JungleGreenTwo"
+                  }`}
+               >
+                  <label
+                     className={`font-semibold ${
+                        showJobError ? "text-red-500" : "text-JungleGreenOne"
+                     } `}
+                     htmlFor="job"
+                  >
                      What
                   </label>
                   <input
@@ -165,9 +165,18 @@ function Search({
                ))}
             </select> */}
             <div>
-               <div className="relative w-[26rem] rounded-md border border-JungleGreenTwo pl-4">
+               <div
+                  className={`relative w-[26rem] rounded-md border pl-4 ${
+                     showLocationError ? "border-red-500" : "border-JungleGreenTwo"
+                  }`}
+               >
                   <div className="w-full">
-                     <label className="font-semibold text-JungleGreenOne" htmlFor="location">
+                     <label
+                        className={`font-semibold ${
+                           showLocationError ? "text-red-500" : "text-JungleGreenOne"
+                        } `}
+                        htmlFor="location"
+                     >
                         Where
                      </label>
                      <input
