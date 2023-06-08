@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import companies from "../companies_data.json";
 import ReactPaginate from "react-paginate";
 import DisplayCompanies from "../components/DisplayCompanies";
+import { motion } from "framer-motion";
 
 function CompaniesPage() {
    const [currentCompanies, setCurrentCompanies] = useState(companies);
@@ -13,7 +14,6 @@ function CompaniesPage() {
    // from an API endpoint with useEffect and useState)
    const endOffset = itemOffset + itemsPerPage;
    //    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-   //    const currentCompanies = companies.slice(itemOffset, endOffset);
    const filteredCompanies = currentCompanies.slice(itemOffset, endOffset);
 
    const pageCount = Math.ceil(currentCompanies.length / itemsPerPage);
@@ -25,17 +25,18 @@ function CompaniesPage() {
       setItemOffset(newOffset);
    };
 
-   // useEffect(() => {
-   //    setCurrentCompanies(companies.slice(itemOffset, endOffset));
-   // }, [endOffset]);
-
    return (
-      <main className="p-8">
+      <motion.main
+         className="p-8"
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         exit={{
+            opacity: 0,
+         }}
+      >
          <DisplayCompanies
             filteredCompanies={filteredCompanies}
             setCurrentCompanies={setCurrentCompanies}
-            itemOffset={itemOffset}
-            endOffset={endOffset}
          />
          <ReactPaginate
             breakLabel="..."
@@ -53,7 +54,7 @@ function CompaniesPage() {
             activeLinkClassName="active"
             disabledLinkClassName="disable-btn"
          />
-      </main>
+      </motion.main>
    );
 }
 

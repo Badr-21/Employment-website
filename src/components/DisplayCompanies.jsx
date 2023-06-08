@@ -1,28 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import locationIcon from "../assets/location-icon.svg";
 import arrowDownIcon from "../assets/arrow-down-icon.svg";
 import companies from "../companies_data.json";
 
-function DisplayCompanies({ filteredCompanies, setCurrentCompanies, itemOffset, endOffset }) {
+function DisplayCompanies({ filteredCompanies, setCurrentCompanies }) {
    const [showIndustriesFilter, setShowIndustriesFilter] = useState(false);
-   const [showLocationsFilter, setShowLocationFilter] = useState(false);
+   const [showLocationsFilter, setShowLocationsFilter] = useState(false);
    const [showSizesFilter, setShowSizesFilter] = useState(false);
+   const industriesFilterRef = useRef();
+   const locationsFilterRef = useRef();
+   const sizesFilterRef = useRef();
 
    const handleShowIndustriesFilter = () => {
       setShowIndustriesFilter(!showIndustriesFilter);
-      setShowLocationFilter(false);
+      setShowLocationsFilter(false);
       setShowSizesFilter(false);
    };
 
    const handleShowLocationsFilter = () => {
-      setShowLocationFilter(!showLocationsFilter);
+      setShowLocationsFilter(!showLocationsFilter);
       setShowIndustriesFilter(false);
       setShowSizesFilter(false);
    };
 
    const handleShowSizesFilter = () => {
       setShowIndustriesFilter(false);
-      setShowLocationFilter(false);
+      setShowLocationsFilter(false);
       setShowSizesFilter(!showSizesFilter);
    };
 
@@ -42,10 +45,6 @@ function DisplayCompanies({ filteredCompanies, setCurrentCompanies, itemOffset, 
       .sort()
       .reverse();
 
-   const names = companies
-      .map((company) => company.name)
-      .filter((name, index, arr) => arr.indexOf(name) === index);
-
    const handleFilterIndustry = (e) => {
       const filteredByIndustry = companies.filter((company) => {
          for (let i = 0; i < company.industries.length; i++) {
@@ -53,6 +52,7 @@ function DisplayCompanies({ filteredCompanies, setCurrentCompanies, itemOffset, 
          }
       });
       setCurrentCompanies(filteredByIndustry);
+      setShowIndustriesFilter(false);
    };
 
    const handleFilterLocation = (e) => {
@@ -62,6 +62,7 @@ function DisplayCompanies({ filteredCompanies, setCurrentCompanies, itemOffset, 
          }
       });
       setCurrentCompanies(filteredByLocation);
+      setShowLocationsFilter(false);
    };
 
    const handleFilterSize = (e) => {
@@ -69,20 +70,43 @@ function DisplayCompanies({ filteredCompanies, setCurrentCompanies, itemOffset, 
          (company) => company.size.name === e.target.textContent
       );
       setCurrentCompanies(filteredBySize);
+      setShowSizesFilter(false);
    };
+
+   const handleFilterAll = () => {
+      setCurrentCompanies(companies);
+   };
+
+   useEffect(() => {
+      const closeFilter = (e) => {
+         if (!industriesFilterRef.current.contains(e.target)) {
+            setShowIndustriesFilter(false);
+         }
+         if (!locationsFilterRef.current.contains(e.target)) {
+            setShowLocationsFilter(false);
+         }
+         if (!sizesFilterRef.current.contains(e.target)) {
+            setShowSizesFilter(false);
+         }
+      };
+      document.body.addEventListener("click", closeFilter, true);
+      return () => document.body.removeEventListener("click", closeFilter, true);
+   });
+
    return (
       <article className="w-full">
          <section className="mb-16 flex flex-col items-center">
             <h1 className="mb-12 text-3xl font-bold text-EerieBlack">
                <span className="text-JungleGreenTwo">Companies</span> that we work with.
             </h1>
-            <div className=" flex w-full justify-start gap-x-8">
+            <div className=" flex w-full flex-wrap justify-start gap-x-8 gap-y-4">
                <div className="relative self-start">
                   <div
+                     ref={industriesFilterRef}
                      onClick={handleShowIndustriesFilter}
                      className="flex items-center gap-x-2 rounded-md bg-JungleGreenTwo py-2 pl-4 pr-2 font-semibold text-white hover:cursor-pointer hover:bg-DimGray"
                   >
-                     <p>Industries</p>
+                     <p>Categories</p>
                      <img className="w-6" src={arrowDownIcon} alt="arrow icon" />
                   </div>
                   <div
@@ -103,6 +127,7 @@ function DisplayCompanies({ filteredCompanies, setCurrentCompanies, itemOffset, 
                </div>
                <div className="relative self-start">
                   <div
+                     ref={locationsFilterRef}
                      onClick={handleShowLocationsFilter}
                      className="flex items-center gap-x-2 rounded-md bg-JungleGreenTwo py-2 pl-4 pr-2 font-semibold text-white hover:cursor-pointer hover:bg-DimGray"
                   >
@@ -127,6 +152,7 @@ function DisplayCompanies({ filteredCompanies, setCurrentCompanies, itemOffset, 
                </div>
                <div className="relative self-start">
                   <div
+                     ref={sizesFilterRef}
                      onClick={handleShowSizesFilter}
                      className="flex items-center gap-x-2 rounded-md bg-JungleGreenTwo py-2 pl-4 pr-2 font-semibold text-white hover:cursor-pointer hover:bg-DimGray"
                   >
@@ -149,12 +175,18 @@ function DisplayCompanies({ filteredCompanies, setCurrentCompanies, itemOffset, 
                      ))}
                   </div>
                </div>
+               <div
+                  className="rounded-md bg-JungleGreenTwo px-4 py-2 font-semibold text-white hover:cursor-pointer hover:bg-DimGray"
+                  onClick={handleFilterAll}
+               >
+                  All
+               </div>
             </div>
          </section>
          <section className="mb-8 flex w-full flex-wrap justify-center gap-8">
             {filteredCompanies?.map((company) => (
                <div
-                  className="max-h-max w-[18rem] rounded-md border border-JungleGreenTwo p-4 shadow-md"
+                  className="max-h-max w-[18rem] rounded-md border p-4 shadow-md"
                   key={company.id}
                >
                   <div className="mb-4 flex items-center gap-x-4">
