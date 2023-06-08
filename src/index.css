@@ -26,4 +26,9 @@
       color: #5f6068;
       cursor: no-drop;
    }
+
+   .filter-icon {
+      filter: invert(60%) sepia(57%) saturate(5397%) hue-rotate(135deg) brightness(91%)
+         contrast(98%);
+   }
 }
