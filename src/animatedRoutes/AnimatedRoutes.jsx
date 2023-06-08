@@ -2,7 +2,9 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import SearchJobPage from "../pages/SearchJobPage";
 import CompaniesPage from "../pages/CompaniesPage";
-import SearchResultPage from "../pages/SearchResultPage";
+import JobDetailsPage from "../pages/JobDetailsPage";
+import LogInPage from "../pages/LogInPage";
+import SingUpPage from "../pages/SingUpPage";
 function AnimatedRoutes() {
    return (
       <>
@@ -10,9 +12,11 @@ function AnimatedRoutes() {
             <Route path="/" element={<HomePage />} />
             <Route path="search-job">
                <Route index element={<SearchJobPage />} />
-               <Route path="search-result" element={<SearchResultPage />} />
+               <Route path=":id" element={<JobDetailsPage />} />
             </Route>
             <Route path="companies" element={<CompaniesPage />} />
+            <Route path="log-in" element={<LogInPage />} />
+            <Route path="sign-up" element={<SingUpPage />} />
          </Routes>
       </>
    );
