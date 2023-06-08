@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import jobs from "../jobs_data.json";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Search({
    setTheJob,
@@ -12,13 +12,14 @@ function Search({
    setAllLocations,
    setAllJobs,
    setClickedSearch,
-   clickedSearch,
 }) {
    const [showLocations, setShowLocations] = useState(true);
    const [showJobError, setShowJobError] = useState(false);
    const [showLocationError, setShowLocationError] = useState(false);
+   const [showPlaceholder, setShowPlaceholder] = useState(true);
 
    const inputLocationRef = useRef();
+   const locationsRef = useRef();
 
    const handleJob = (e) => {
       setTheJob(e.target.value);
@@ -34,7 +35,6 @@ function Search({
    const clickOnLocation = (e) => {
       inputLocationRef.current.value = e.target.textContent;
       setTheLocation(e.target.textContent);
-      // console.log(e.target.textContent);
    };
 
    const currentLocations = jobs
@@ -54,8 +54,6 @@ function Search({
             );
             setResult(currentJobs);
             setClickedSearch(true);
-            console.log(currentJobs);
-            // setNavigation(true);
          }
       }
       if (!theJob.length && theLocation.length) {
@@ -69,8 +67,6 @@ function Search({
             });
             setResult(currentJobs);
             setClickedSearch(true);
-            console.log(currentJobs);
-            // setNavigation(true);
          }
       }
       if (theJob.length && theLocation.length) {
@@ -92,8 +88,6 @@ function Search({
             });
             setResult(currentJobs);
             setClickedSearch(true);
-            console.log(currentJobs);
-            // setNavigation(true);
          }
       }
       if (!theJob.length && !theLocation.length) {
@@ -102,19 +96,6 @@ function Search({
       }
       setShowLocations(false);
    };
-
-   // const handleSubmit = (e) => {
-   //    e.preventDefault();
-   //    search();
-   // };
-
-   // useEffect(() => {
-   //    if (navigation) {
-   //       setTimeout(() => {
-   //          navigate("search-result", { state: { result: result } });
-   //       }, 1000);
-   //    }
-   // });
 
    useEffect(() => {
       if (result) {
@@ -127,12 +108,35 @@ function Search({
       setAllJobs(jobs.length);
    });
 
+   useEffect(() => {
+      const handlePlaceholder = () => {
+         if (window.innerWidth <= 640) {
+            setShowPlaceholder(false);
+         } else {
+            setShowPlaceholder(true);
+         }
+      };
+      handlePlaceholder();
+      window.addEventListener("resize", handlePlaceholder);
+      return () => window.removeEventListener("rezise", handlePlaceholder);
+   }, []);
+
+   useEffect(() => {
+      const closeFilterLocation = (e) => {
+         if (!locationsRef.current.contains(e.target)) {
+            setShowLocations(false);
+         }
+      };
+      document.body.addEventListener("click", closeFilterLocation, true);
+      return () => document.body.removeEventListener("click", closeFilterLocation, true);
+   });
+
    return (
-      <section className="w-full px-8 py-12">
-         <form className="flex w-full items-start justify-center gap-x-8">
-            <div>
+      <section className="z-0 mb-8 w-full px-8 pt-12 lg:py-12">
+         <form className="flex w-full flex-col items-center gap-y-8 lg:flex-row lg:items-start lg:justify-center lg:gap-x-8">
+            <div className="w-full lg:w-[26rem]">
                <div
-                  className={`w-[26rem] rounded-md border  pl-4 ${
+                  className={`w-full rounded-md border pl-4  lg:w-[26rem] ${
                      showJobError ? "border-red-500" : "border-JungleGreenTwo"
                   }`}
                >
@@ -145,28 +149,21 @@ function Search({
                      What
                   </label>
                   <input
-                     className="w-[22.2rem] py-2 pl-4 outline-none"
+                     className="w-[50%] py-2 pl-4 outline-none lg:w-[22.2rem]"
                      id="job"
                      type="text"
                      name="job"
-                     placeholder="Job title, keyword"
+                     placeholder={showPlaceholder ? "Job title, keyword" : ""}
                      onChange={handleJob}
                   />
                </div>
                {showJobError ? (
-                  <p className="relative z-20 text-red-500">job must be 3 characters or more.</p>
+                  <p className="z-2 relative text-red-500">job must be 3 characters or more.</p>
                ) : null}
             </div>
-            {/* <select className="border" name="company" value={theCompany} onChange={handleCompany}>
-               {currentCompanies.map((currentCompany) => (
-                  <option value={currentCompany} key={currentCompany}>
-                     {currentCompany}
-                  </option>
-               ))}
-            </select> */}
-            <div>
+            <div className="w-full lg:w-[26rem]">
                <div
-                  className={`relative w-[26rem] rounded-md border pl-4 ${
+                  className={`relative w-full rounded-md border pl-4 lg:w-[26rem] ${
                      showLocationError ? "border-red-500" : "border-JungleGreenTwo"
                   }`}
                >
@@ -180,18 +177,19 @@ function Search({
                         Where
                      </label>
                      <input
-                        className="w-[21.6rem]  py-2 pl-4 outline-none"
+                        className="w-[50%] py-2 pl-4 outline-none lg:w-[21.6rem]"
                         id="location"
                         type="text"
                         name="location"
-                        placeholder="City, state, country, or 'remote'"
+                        placeholder={showPlaceholder ? "City, state, country, or 'remote'" : ""}
                         onChange={handleLocation}
                         ref={inputLocationRef}
                      />
                   </div>
                   <div
+                     ref={locationsRef}
                      className={
-                        "absolute left-0 top-11 z-10 max-h-[15.5rem] w-full overflow-hidden bg-white py-2 pl-4 "
+                        "z-1 absolute left-0 top-11 max-h-[15rem] w-full overflow-hidden bg-white pl-4 "
                      }
                   >
                      {theLocation.length && showLocations
@@ -212,14 +210,14 @@ function Search({
                   </div>
                </div>
                {showLocationError ? (
-                  <p className="relative z-20 text-red-500">
+                  <p className="z-2 relative text-red-500">
                      location must be 3 characters or more.
                   </p>
                ) : null}
             </div>
-            <Link onClick={handleSearch}>
+            <Link className="flex w-full justify-center lg:w-auto" onClick={handleSearch}>
                <button
-                  className="rounded-md border bg-JungleGreenOne px-4 py-2 font-semibold text-white hover:opacity-90"
+                  className="w-full rounded-md border bg-JungleGreenOne px-4 py-2 font-semibold text-white hover:opacity-90 sm:w-1/2 lg:w-[6rem]"
                   type="submit"
                >
                   Search

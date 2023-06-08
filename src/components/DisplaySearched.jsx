@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import locationIcon from "../assets/location-icon.svg";
 import jobLevelIcon from "../assets/job-level-icon.svg";
 import companyIonc from "../assets/company-icon.svg";
+import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 
 function DisplaySearched({ result, clickedSearch }) {
    const [jobDetails, setJobDetails] = useState();
+   const [showJobDetails, setShowJobDetails] = useState(true);
    const divJobRef = useRef();
 
    const handleJobDetails = (e) => {
@@ -13,31 +15,55 @@ function DisplaySearched({ result, clickedSearch }) {
       for (let child of divJobRef.current.children) {
          child.classList.remove("bg-clicked");
       }
-      e.target.parentElement.classList.add("bg-clicked");
+      e.target.parentElement.parentElement.classList.add("bg-clicked");
       setJobDetails(...details);
    };
 
-   const stoh = (str) => {
+   const handleJobDetailsNewTab = (e) => {
+      const jobDetails = result.filter((job) => job.id.toString() === e.target.id);
+      localStorage.setItem("job-details", JSON.stringify(...jobDetails));
+   };
+
+   const parseString = (str) => {
       const reactElement = parse(str);
       return reactElement;
    };
+
    useEffect(() => {
-      if (result.length) {
-         const details = result.filter((job, index) => index === 0);
-         setJobDetails(...details);
-         divJobRef.current.children[0].classList.add("bg-clicked");
+      if (window.innerWidth > 1000) {
+         if (result.length) {
+            const details = result.filter((job, index) => index === 0);
+            setJobDetails(...details);
+            divJobRef.current.children[0].classList.add("bg-clicked");
+         }
       }
    }, [result]);
+
+   useEffect(() => {
+      const handleShowJobDetails = () => {
+         if (window.innerWidth <= 900) {
+            setShowJobDetails(false);
+         } else {
+            setShowJobDetails(true);
+         }
+      };
+      handleShowJobDetails();
+      window.addEventListener("resize", handleShowJobDetails);
+      return () => window.removeEventListener("rezise", handleShowJobDetails);
+   }, [result, window.innerWidth]);
+
    return (
-      <section className="w-full">
+      <section className="w-full p-8">
          {result.length && clickedSearch ? (
             <div className="flex w-full justify-center gap-x-8">
-               <div ref={divJobRef}>
+               <div className={showJobDetails ? "" : "w-full"} ref={divJobRef}>
                   {result.map((job) => {
                      return (
                         <div
                            key={job.id}
-                           className="mb-8 w-[25.5rem] rounded-md border border-JungleGreenTwo p-4 hover:bg-Platinum"
+                           className={`${
+                              showJobDetails ? "w-[25.5rem]" : "w-full"
+                           } mb-8  rounded-md border border-JungleGreenTwo p-4 hover:bg-Platinum`}
                         >
                            <h2 className="mb-2 text-lg font-bold text-EerieBlack">{job.name}</h2>
                            <div className="mb-2 flex items-start gap-x-4">
@@ -59,20 +85,31 @@ function DisplaySearched({ result, clickedSearch }) {
                               <p className=" text-DimGray">{job.levels[0].name}</p>
                               <img className="w-4" src={jobLevelIcon} alt="job level icon" />
                            </div>
-                           <button
-                              id={job.id}
-                              onClick={handleJobDetails}
-                              className="text-JungleGreenTwo hover:underline"
+                           <Link
+                              to={showJobDetails ? "" : `${job.id}`}
+                              target={showJobDetails ? "" : "_blank"}
                            >
-                              More...
-                           </button>
+                              <button
+                                 id={job.id}
+                                 onClick={
+                                    showJobDetails ? handleJobDetails : handleJobDetailsNewTab
+                                 }
+                                 className="text-JungleGreenTwo hover:underline"
+                              >
+                                 More...
+                              </button>
+                           </Link>
                         </div>
                      );
                   })}
                </div>
-               <div className="sticky top-8 h-[37rem] w-[33.5rem] rounded-md border border-JungleGreenTwo">
+               <div
+                  className={`sticky top-8 h-[37rem] w-[33.5rem] overflow-y-scroll rounded-md  border border-JungleGreenTwo p-4 ${
+                     showJobDetails ? "" : "hidden"
+                  }`}
+               >
                   {jobDetails ? (
-                     <div className="p-4">
+                     <div>
                         <h2 className="mb-2 text-lg font-bold text-EerieBlack">
                            {jobDetails.name}
                         </h2>
@@ -105,26 +142,28 @@ function DisplaySearched({ result, clickedSearch }) {
                               </a>
                            </button>
                         </div>
-                        <div className="max-h-[22rem] overflow-y-scroll text-sm font-medium text-EerieBlack">
-                           {stoh(jobDetails.contents)}
+                        <div className="text-sm font-medium text-EerieBlack">
+                           {parseString(jobDetails.contents)}
                         </div>
                      </div>
                   ) : null}
                </div>
             </div>
          ) : (
-            // <div className="flex w-full flex-col items-center gap-y-8 pt-16">
-            //    <h1 className="text-3xl font-bold text-EerieBlack">
-            //       Run a search to find your <span className="text-JungleGreenOne">next job</span>.
-            //    </h1>
-            //    <p className="text-xl font-medium text-EerieBlack">
-            //       Currently there are{" "}
-            //       <span className="font-semibold text-JungleGreenOne">{allJobs}</span> jobs in{" "}
-            //       <span className="font-semibold text-JungleGreenOne">{allLocations} </span>
-            //       different locations around the world.
-            //    </p>
-            // </div>
-            "not found"
+            <div className="flex w-full flex-col items-center">
+               <h2 className="mb-4 text-2xl font-bold">
+                  The search did not match any <span className="text-JungleGreenTwo">jobs</span>.
+               </h2>
+               <div>
+                  <p className="mb-2 text-lg font-semibold">Search suggestions</p>
+                  <ul className="list-disc">
+                     <li>Try more general keywords</li>
+                     <li>Check your spelling</li>
+                     <li>Replace abbreviations with the entire word</li>
+                     <li>Change location/try remote</li>
+                  </ul>
+               </div>
+            </div>
          )}
       </section>
    );

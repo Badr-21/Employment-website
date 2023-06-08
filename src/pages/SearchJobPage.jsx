@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Search from "../components/Search";
 import DisplaySearched from "../components/DisplaySearched";
+import { motion } from "framer-motion";
+
 const getSessionStorage = () => {
-   const result = JSON.parse(sessionStorage.getItem("result"));
+   const result = sessionStorage.getItem("result");
    if (result) {
       return JSON.parse(sessionStorage.getItem("result"));
    } else {
@@ -19,7 +21,13 @@ function SearchJob() {
    const [clickedSearch, setClickedSearch] = useState(false);
 
    return (
-      <main>
+      <motion.main
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         exit={{
+            opacity: 0,
+         }}
+      >
          <Search
             setTheJob={setTheJob}
             setTheLocation={setTheLocation}
@@ -39,7 +47,7 @@ function SearchJob() {
                clickedSearch={clickedSearch}
             />
          ) : (
-            <div className="flex w-full flex-col items-center gap-y-8 pt-16">
+            <div className="flex w-full flex-col items-center gap-y-8 px-8 pt-16">
                <h1 className="text-3xl font-bold text-EerieBlack">
                   Run a search to find your <span className="text-JungleGreenOne">next job</span>.
                </h1>
@@ -51,7 +59,7 @@ function SearchJob() {
                </p>
             </div>
          )}
-      </main>
+      </motion.main>
    );
 }
 
