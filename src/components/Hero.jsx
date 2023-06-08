@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 import heroImage from "../assets/hero-image.png";
 function Hero() {
    return (
-      <article className="flex w-full items-center justify-between px-8">
+      <article className="mb-8 flex w-full flex-col-reverse items-center justify-between px-8 md:flex-row">
          <section>
-            <h1 className=" flex text-4xl font-bold text-EerieBlack">
-               If opportunity doesn't knock
-               <span className="text-JungleGreenTwo">, build a door.</span>
+            <h1 className="text-3xl font-bold text-EerieBlack sm:text-4xl">
+               If opportunity doesn't knock,
+               <span className="text-JungleGreenTwo"> build a door.</span>
             </h1>
-            <p className="mb-8 self-end text-right text-2xl font-semibold text-EerieBlack">
+            <p className="mb-8 self-end text-right text-xl font-semibold text-EerieBlack sm:text-2xl">
                Milton Berle
             </p>
-            <p className="mb-8 text-xl font-semibold text-DimGray">
+            <p className="mb-8 text-lg font-semibold text-DimGray sm:text-xl">
                Getting your dream job has never been easier, HuntJob is here for you.
             </p>
             <Link to="search-job">
@@ -20,8 +20,8 @@ function Hero() {
                </button>
             </Link>
          </section>
-         <section>
-            <img className="w-[33rem]" src={heroImage} alt="woman work on laptop" />
+         <section className=" mb-4 sm:mb-0">
+            <img className="w-[25rem] sm:w-[33rem]" src={heroImage} alt="woman work on laptop" />
          </section>
       </article>
    );

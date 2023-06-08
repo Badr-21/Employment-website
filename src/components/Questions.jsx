@@ -7,9 +7,9 @@ function Questions() {
    }, []);
 
    return (
-      <section className="flex w-full flex-col items-center gap-y-8 px-8">
+      <section className="mb-8 flex w-full flex-col items-center gap-y-8 px-8">
          <h2 className="text-2xl font-bold">Frequently asked questions (FAQs)</h2>
-         <div className="w-1/2" id="accordionExample">
+         <div className="w-full md:w-4/5 lg:w-2/3 xl:w-1/2" id="accordionExample">
             <div className="mb-4 rounded-lg border ">
                <p id="headingOne">
                   <button

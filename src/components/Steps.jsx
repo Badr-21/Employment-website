@@ -4,10 +4,10 @@ import applyJobIcon from "../assets/apply-job-icon.svg";
 import checkedSuccessIcon from "../assets/checked-success-icon.svg";
 function Steps() {
    return (
-      <section className="flex w-full flex-col items-center px-8">
+      <section className="mb-8 flex w-full flex-col items-center px-8">
          <h2 className="mb-12 text-2xl font-bold">How does it work?</h2>
-         <div className="flex gap-x-8">
-            <div className="relative flex w-1/4 flex-col justify-between rounded-md border p-8 shadow-new-md">
+         <div className="flex w-full flex-wrap justify-center gap-8 md:justify-between">
+            <div className="relative flex w-[18rem] flex-col justify-between rounded-md border p-8 shadow-new-md">
                <h3 className="text-xl font-bold text-EerieBlack">Create an account</h3>
                <p className="text-DimGray">
                   Sign up easily with your basic information to gain access to personalized job
@@ -22,7 +22,7 @@ function Steps() {
                   alt="use profile icon"
                />
             </div>
-            <div className="relative flex w-1/4 flex-col justify-between rounded-md border p-8 shadow-new-md">
+            <div className="relative flex w-[18rem] flex-col justify-between rounded-md border p-8 shadow-new-md">
                <h3 className="text-xl font-bold text-EerieBlack">Search a Job</h3>
                <p className="text-DimGray">
                   Use our powerful search engine to filter job listings based on location, industry,
@@ -37,7 +37,7 @@ function Steps() {
                   alt="magnifying glass icon"
                />
             </div>
-            <div className="relative flex w-1/4 flex-col justify-between rounded-md border p-8 shadow-new-md">
+            <div className="relative flex w-[18rem] flex-col justify-between rounded-md border p-8 shadow-new-md">
                <h3 className="text-xl font-bold text-EerieBlack">Apply to Jobs</h3>
                <p className="text-DimGray">
                   Submit applications effortlessly through our user-friendly interface, including
@@ -52,7 +52,7 @@ function Steps() {
                   alt="apply job icon"
                />
             </div>
-            <div className="relative flex w-1/4 flex-col justify-between rounded-md border p-8 shadow-new-md">
+            <div className="relative flex w-[18rem] flex-col justify-between rounded-md border p-8 shadow-new-md">
                <h3 className="text-xl font-bold text-EerieBlack">Get Hired</h3>
                <p className="text-DimGray">
                   Manage your applications, track their status, and communicate with employers.

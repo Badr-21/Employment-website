@@ -16,11 +16,11 @@ function Testimonials() {
       initTE({ Carousel });
    }, []);
    return (
-      <section className="flex w-full flex-col items-center gap-y-8 p-8">
+      <section className="mb-8 flex w-full flex-col items-center gap-y-8 p-8">
          <h2 className="text-2xl font-bold">Testimonials</h2>
          <div
             id="carouselExampleIndicators"
-            className="relative w-2/3 rounded-lg border px-16 py-8"
+            className="relative  w-full rounded-lg border px-8 py-8 sm:px-16 lg:w-5/6 xl:w-2/3"
             data-te-carousel-init
             data-te-carousel-slide
          >
@@ -69,7 +69,7 @@ function Testimonials() {
             </div>
 
             {/* <!--Carousel items--> */}
-            <div className="relative mb-4 h-[19rem] w-full overflow-hidden rounded-lg shadow-new-md after:clear-both after:block after:content-['']">
+            <div className="relative mb-4 h-auto w-full overflow-hidden rounded-lg shadow-new-md after:clear-both after:block after:content-[''] md:h-[19rem]">
                {/* <!--First item--> */}
                <div
                   className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
@@ -77,11 +77,11 @@ function Testimonials() {
                   data-te-carousel-active
                >
                   <div className="w-full px-8 py-4">
-                     <div className="mb-8 flex w-full items-center gap-x-4">
+                     <div className="mb-2 flex w-full items-center gap-x-4 md:mb-8">
                         <img className="w-10" src={microsoftLogo} alt="microsoft logo" />
                         <p className="text-xl font-semibold">Microsoft</p>
                      </div>
-                     <p className="mb-12 text-sm font-medium text-DimGray">
+                     <p className="mb-4 text-sm font-medium text-DimGray md:mb-12">
                         I had relocated to a new city and was struggling to find employment in my
                         area of expertise. That's when I came across this employment website. It not
                         only allowed me to search for jobs based on location but also provided
@@ -89,7 +89,7 @@ function Testimonials() {
                         the website's resources and job alerts, I quickly found a job that matched
                         my skills, and I'm now happily employed in my new city.
                      </p>
-                     <div className="mb-4 flex justify-between">
+                     <div className="mb-0 md:mb-4 md:flex md:justify-between ">
                         <div className="flex gap-x-2">
                            <img
                               className="h-10 w-10 rounded-full"
@@ -117,11 +117,11 @@ function Testimonials() {
                   data-te-carousel-item
                >
                   <div className="w-full px-8 py-4">
-                     <div className="mb-8 flex w-full items-center gap-x-4">
+                     <div className="mb-2 flex w-full items-center gap-x-4 md:mb-8">
                         <img className="w-10" src={behanceLogo} alt="behance logo" />
                         <p className="text-xl font-semibold">Behance</p>
                      </div>
-                     <p className="mb-12 text-sm font-medium text-DimGray">
+                     <p className="mb-4 text-sm font-medium text-DimGray md:mb-12">
                         I was hesitant to try an online employment website, but I'm so glad I did.
                         The website provided me with a wide range of job options in my desired
                         field, and the application process was straightforward. The best part was
@@ -129,7 +129,7 @@ function Testimonials() {
                         preferences. Thanks to this website, I secured a fantastic job that aligned
                         perfectly with my career goals.
                      </p>
-                     <div className="mb-4 flex justify-between">
+                     <div className="mb-0 md:mb-4 md:flex md:justify-between ">
                         <div className="flex gap-x-2">
                            <img
                               className="h-10 w-10 rounded-full"
@@ -157,11 +157,11 @@ function Testimonials() {
                   data-te-carousel-item
                >
                   <div className="w-full px-8 py-4">
-                     <div className="mb-8 flex w-full items-center gap-x-4">
+                     <div className="mb-2 flex w-full items-center gap-x-4 md:mb-8">
                         <img className="w-10" src={appleLogo} alt="apple logo" />
                         <p className="text-xl font-semibold">Apple</p>
                      </div>
-                     <p className="mb-12 text-sm font-medium text-DimGray">
+                     <p className="mb-4 text-sm font-medium text-DimGray md:mb-12">
                         I had been searching for a job for months, but it wasn't until I registered
                         on this employment website that I found success. Within a week, I received
                         multiple interview requests and finally landed my dream job. The platform
@@ -169,7 +169,7 @@ function Testimonials() {
                         highly recommend this website to anyone looking for employment
                         opportunities.
                      </p>
-                     <div className="mb-4 flex justify-between">
+                     <div className="mb-0 md:mb-4 md:flex md:justify-between ">
                         <div className="flex gap-x-2">
                            <img
                               className="h-10 w-10 rounded-full"
@@ -197,11 +197,11 @@ function Testimonials() {
                   data-te-carousel-item
                >
                   <div className="w-full px-8 py-4">
-                     <div className="mb-8 flex w-full items-center gap-x-4">
+                     <div className="mb-2 flex w-full items-center gap-x-4 md:mb-8">
                         <img className="w-10" src={printerestLogo} alt="pinterest logo" />
                         <p className="text-xl font-semibold">Pinterest</p>
                      </div>
-                     <p className="mb-12 text-sm font-medium text-DimGray">
+                     <p className="mb-4 text-sm font-medium text-DimGray md:mb-12">
                         As a recent college graduate, I was overwhelmed by the job search process.
                         However, this employment website made it much easier for me. The website had
                         a wide range of entry-level job opportunities, and I appreciated the ability
@@ -210,7 +210,7 @@ function Testimonials() {
                         my first professional position. I highly recommend this website to fellow
                         graduates.
                      </p>
-                     <div className="mb-4 flex justify-between">
+                     <div className="mb-0 md:mb-4 md:flex md:justify-between ">
                         <div className="flex gap-x-2">
                            <img
                               className="h-10 w-10 rounded-full"
@@ -238,11 +238,11 @@ function Testimonials() {
                   data-te-carousel-item
                >
                   <div className="w-full px-8 py-4">
-                     <div className="mb-8 flex w-full items-center gap-x-4">
+                     <div className="mb-2 flex w-full items-center gap-x-4 md:mb-8">
                         <img className="w-10" src={teslaMotorsLogo} alt="tesla motors logo" />
                         <p className="text-xl font-semibold">Tesla motors</p>
                      </div>
-                     <p className="mb-12 text-sm font-medium text-DimGray">
+                     <p className="mb-4 text-sm font-medium text-DimGray md:mb-12">
                         I had been out of the workforce for several years due to personal
                         commitments, and I was worried about reentering the job market. This
                         employment website provided a supportive and inclusive environment for
@@ -250,7 +250,7 @@ function Testimonials() {
                         career and found a fulfilling job. I can't thank them enough for their
                         dedication to helping job seekers
                      </p>
-                     <div className="mb-4 flex justify-between">
+                     <div className="mb-0 md:mb-4 md:flex md:justify-between ">
                         <div className="flex gap-x-2">
                            <img
                               className="h-10 w-10 rounded-full"
