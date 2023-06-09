@@ -25,6 +25,12 @@ function CompaniesPage() {
       setItemOffset(newOffset);
    };
 
+   useEffect(() => {
+      window.scrollTo({
+         top: 0,
+      });
+   });
+
    return (
       <motion.main
          className="p-8"
