@@ -5,9 +5,11 @@ import CompaniesPage from "../pages/CompaniesPage";
 import JobDetailsPage from "../pages/JobDetailsPage";
 import LogInPage from "../pages/LogInPage";
 import SingUpPage from "../pages/SingUpPage";
+import { AnimatePresence } from "framer-motion";
+
 function AnimatedRoutes() {
    return (
-      <>
+      <AnimatePresence>
          <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="search-job">
@@ -18,7 +20,7 @@ function AnimatedRoutes() {
             <Route path="log-in" element={<LogInPage />} />
             <Route path="sign-up" element={<SingUpPage />} />
          </Routes>
-      </>
+      </AnimatePresence>
    );
 }
 
