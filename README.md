@@ -5,9 +5,9 @@ Employment website is my second portfolio project, it's a job search website usi
 
 
 ## Usage
-It's very simple, you need to write a job title or a keyword in the input field (What) or the location in the input field (where), or write both, then click on search.
+Enter a job title or a keyword in the input field (What) or enter the location in the input field (where), or enter both, then click on search.
 
-You can also search for remote job in the input field (where).
+You can also search for remote jobs in the input field (where).
 
 You can click on the job to show more details.
 
