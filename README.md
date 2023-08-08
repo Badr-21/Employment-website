@@ -1,7 +1,7 @@
 # JobHunt
 JobHunt is an employment website. It's my second portfolio project. it's a job search website using data extracted from [The muse api](https://www.themuse.com/developers/api/v2) and stored in a JSON file.
 
-![Empolyment website landing page](https://github.com/Badr-21/Employment-website/blob/main/public/landing-page.png)
+![Empolyment website landing page](https://github.com/Badr-21/Employment-website/blob/main/public/home-page.png)
 
 
 ## Usage
